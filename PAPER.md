@@ -6,13 +6,11 @@ This worked example studies whether image-generation style control changes deep 
 
 ## 1. Introduction and research question
 
-Text-to-image models make style control feel simple. A user can add "anime," "surrealist," or "noir" to a prompt and get a visibly different image. But visible difference is not the same as deep style fidelity. A model might add rain, shadows, or large eyes while ignoring composition, texture, movement, or the logic of the art style.
+This project grew out of ongoing experimentation with image generation models I have been collecting and testing since March. Rather than approaching models as isolated tools, I began noticing differences in how they interpret style, structure, and prompts across similar scenes. These observations led to a more structured comparison between general-purpose and style-tuned models.
 
-This project asks:
+The goal of this paper is to examine how different types of models handle stylistic variation when given the same prompts. In particular, I focus on the tradeoff between flexibility and specialization: whether a model designed for a specific aesthetic produces better results within its domain, and how it performs outside of it.
 
-> When the same prompts are run through general-purpose and style-tuned image models, how much of style control is real and how much is just surface-level style vocabulary?
-
-The imagined Space compares prompt outputs across models and styles to make the tradeoff visible.
+Using hosted demos on Hugging Face, I compare outputs across multiple models, prompts, and styles. The project is less about benchmarking performance in a strict quantitative sense, and more about understanding how design choices in training and architecture shape the outputs we actually see.
 
 ## 2. Related work
 
@@ -22,33 +20,22 @@ These sources support the project's main idea: style control is not one thing. I
 
 ## 3. Method
 
-The imagined Space uses a small prompt grid:
+To explore differences between general-purpose and style-tuned models, I selected three image generation systems: a general model (SDXL or FLUX), a style-specialized model (Animagine XL), and a third model chosen for comparison. These represent different points along the spectrum between flexibility and specialization.
 
-- Scenes: train station at midnight, market street after rain, library with floating books
-- Styles: anime, surrealist, watercolor, noir, realistic
-- Model types: general-purpose model and style-tuned model
+Rather than testing a large number of prompts, I used a small, controlled grid designed to highlight stylistic variation. One scene was selected: a train station at midnight. Each scene was rendered in three styles: anime, surrealist, and noir. This created a consistent structure for comparing outputs across models.
 
-Example prompt:
+All images were generated using hosted demos available through Hugging Face Spaces, which removes setup complexity and ensures consistent inference environments. Prompts were kept as similar as possible across models, though minor adjustments were sometimes required due to differences in how models interpret language.
 
-> A lonely train station at midnight with one person waiting under a broken clock.
-
-Each output is scored with a style fidelity rubric:
-
-| Criterion | Question |
-|---|---|
-| Color and lighting | Does the style affect palette and light? |
-| Line and texture | Does the output show style-specific surface qualities? |
-| Composition | Does the style affect framing and spatial arrangement? |
-| Content preservation | Does the original scene remain recognizable? |
-| Flexibility | Can the model handle styles outside its specialty? |
+Throughout the process, I paid attention not only to output quality, but also to how models responded to stylistic instructions, including consistency, detail, and coherence. These observations form the basis of the qualitative comparisons in the next section.
 
 ## 4. Findings and discussion
 
-The prompt grid suggests that broad style words are powerful but sometimes shallow. The general-purpose model changed outputs clearly across styles. Noir produced high contrast and shadows. Watercolor softened edges. Surrealism often produced impossible clocks or warped buildings. These changes were visible, but sometimes predictable.
-
-The style-tuned model was stronger inside its specialty. On anime prompts, it produced more consistent character design and composition. But when asked for noir realism or surrealism, it often pulled the scene back toward anime-like faces and poster composition. That made the image polished but less faithful to the requested non-anime style.
-
-The strongest example was "train station at midnight in surrealist style." The general-purpose model produced a distorted station and impossible clock, matching the surrealist request more directly. The style-tuned model produced a beautiful anime-like scene, but the surrealist logic was weaker.
+<img width="1024" height="1024" alt="image" src="https://github.com/user-attachments/assets/933ac93c-beac-42fb-b931-0ce938f0b274" />
+The general model produces coherent compositions but struggles to fully commit to a specific style. In anime prompts, linework and stylization are less consistent compared to a specialized model. However, it performs more reliably across different styles.
+<img width="896" height="1152" alt="image" src="https://github.com/user-attachments/assets/0dfcdb9a-2d4b-44ac-bd4e-c7459de17682" />
+The style-tuned model performs significantly better within its domain. In anime-style prompts, it produces cleaner lines, more consistent character design, and stronger stylistic identity. However, outside this domain (e.g., surrealist or noir), outputs degrade or become less coherent.
+<img width="1024" height="1024" alt="image" src="https://github.com/user-attachments/assets/ce513b35-ee33-4923-bade-9dcef23c894e" />
+The Playground v2.5 model shows strong performance in visual quality, particularly in lighting, texture, and overall polish. In surrealist prompts, it generates more creative and abstract compositions compared to SDXL, with stronger use of color and atmosphere.
 
 The finding is:
 
