@@ -43,11 +43,24 @@ The finding is:
 
 This is not a simple ranking. It is a tradeoff. The best model depends on whether the user wants reliable output in one style or flexible exploration across many styles.
 
+To explore the gap between hosted models and deployable systems, I ran the same prompt on both a hosted model and a smaller model capable of running on limited hardware.
+
+Prompt: train station at midnight
+
+Observation:
+The hosted model produced higher fidelity images with better lighting, detail, and composition, but required longer wait times and depends on external infrastructure. The smaller model generated results more quickly and is more accessible for deployment, but with reduced image quality and less consistency.
+
+This introduces a third axis beyond fidelity and flexibility: accessibility. While high-end models produce better outputs, they are not always practical for student projects or public deployment. Smaller models, despite their limitations, offer a more realistic path for building usable systems.
+
 ## 5. Limitations
 
-This is a small, subjective prompt-grid test. It uses a few prompts, a few styles, and one hand-built rubric. A stronger version would save every image, use multiple raters, and compare human style judgments with automated measures such as image-text similarity.
+This project has several limitations. First, the prompt set is small and may not fully capture the range of behaviors across models. A larger and more diverse set of prompts would produce more robust conclusions.
 
-The project also simplifies art history. Labels like "surrealist" and "noir" contain many substyles and historical contexts. A model may reproduce common internet visual markers without understanding the movement. The paper should treat style labels as test prompts, not as complete definitions of art movements.
+Second, all evaluations were conducted by a single observer, introducing subjective bias. No automated metrics or similarity scoring systems were used to validate the comparisons.
+
+Third, differences in prompt interpretation required minor adjustments across models, which may affect consistency. Additionally, there is a gap in the development process between Week 2 and Week 3, where experimentation was less structured.
+
+Finally, the use of hosted demos simplifies testing but does not fully reflect real-world deployment constraints, which are explored only briefly in the stretch section.
 
 ## 6. Conclusion
 
